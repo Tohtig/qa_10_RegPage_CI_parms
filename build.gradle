@@ -48,6 +48,7 @@ allure {
 
 tasks.withType(Test) {
     useJUnitPlatform()
+    systemProperties(System.getProperties()) // основная команда для работы со значениями задаваемыми через терминал
 
     testLogging {
         lifecycle {

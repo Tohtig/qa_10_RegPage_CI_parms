@@ -13,12 +13,24 @@ public class TestBase {
     @BeforeAll
     @Step("Конфигурируем браузер и удаленный запуск")
     static void beforeAllMethod() {
-//        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-
-        Configuration.baseUrl = "https://demoqa.com";
+        /*Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = "1920x1080";
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
-//        Configuration.remote = System.getProperty("remote_driver_url", "https://user1:1234@selenoid.autotests.cloud/wd/hub");
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub"; */
+
+        String login = System.getProperty("login");
+        String password = System.getProperty("password");
+        String url = System.getProperty("url");
+        String browser = System.getProperty("browser");
+        String browserVersion = System.getProperty("version");
+        String browserSize = System.getProperty("browserSize");
+        String remoteUrl = "https://" + login + ":" + password + "@" + url;
+
+        Configuration.browser = browser;
+        Configuration.browserVersion = browserVersion; // available versions: chrome - 90, 91 opera - 76, 77 firefox - 88, 89
+        Configuration.baseUrl = "https://demoqa.com";
+        Configuration.browserSize = browserSize;
+        Configuration.remote = remoteUrl;
+//        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
